@@ -31,7 +31,7 @@ export default function AutomationPage() {
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-primary-600 via-emerald-600 to-primary-600 bg-clip-text text-transparent leading-tight px-4">
               Notion + N8n :
-              <br />L'automatisation sans limites
+              <br />Automatisez tout
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 md:mb-8 leading-relaxed px-4">
@@ -41,12 +41,12 @@ export default function AutomationPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-8 md:mb-12 px-4">
-              <Button href="#contact" variant="primary" className="text-base md:text-lg bg-gradient-to-r from-emerald-600 to-primary-600 w-full sm:w-auto whitespace-nowrap">
-                Découvrir mon potentiel
-                <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
+              <Button href="#contact" variant="primary" className="text-sm md:text-base bg-gradient-to-r from-emerald-600 to-primary-600 w-full sm:w-auto whitespace-nowrap px-6 md:px-8">
+                Audit gratuit
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
-              <Button href="#use-cases" variant="outline" className="text-base md:text-lg border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto whitespace-nowrap">
-                Voir les cas d'usage
+              <Button href="#use-cases" variant="outline" className="text-sm md:text-base border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto whitespace-nowrap px-6 md:px-8">
+                Voir les exemples
               </Button>
             </div>
             

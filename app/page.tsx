@@ -43,12 +43,12 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-8 md:mb-12 px-4">
-              <Button href="#contact" variant="primary" className="text-base md:text-lg w-full sm:w-auto whitespace-nowrap">
-                Audit gratuit 30 min
-                <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
+              <Button href="#contact" variant="primary" className="text-sm md:text-base w-full sm:w-auto whitespace-nowrap px-6 md:px-8">
+                Audit gratuit
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
-              <Button href="#services" variant="outline" className="text-base md:text-lg border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto whitespace-nowrap">
-                Découvrir les solutions
+              <Button href="#services" variant="outline" className="text-sm md:text-base border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto whitespace-nowrap px-6 md:px-8">
+                Voir les services
               </Button>
             </div>
             
