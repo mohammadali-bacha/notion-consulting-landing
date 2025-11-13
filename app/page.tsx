@@ -42,13 +42,13 @@ export default function Home() {
               <strong className="text-gray-900">Notion peut devenir votre avantage compétitif.</strong>
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-8 md:mb-12 px-4">
-              <Button href="#contact" variant="primary" className="text-sm md:text-base w-full sm:w-auto whitespace-nowrap px-6 md:px-8">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-8 md:mb-12 px-4 max-w-2xl mx-auto">
+              <Button href="#contact" variant="primary" className="text-sm w-full sm:w-auto">
                 Audit gratuit
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
-              <Button href="#services" variant="outline" className="text-sm md:text-base border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto whitespace-nowrap px-6 md:px-8">
-                Voir les services
+              <Button href="#services" variant="secondary" className="text-sm w-full sm:w-auto">
+                Nos services
               </Button>
             </div>
             
