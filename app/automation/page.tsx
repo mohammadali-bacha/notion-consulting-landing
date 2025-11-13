@@ -30,22 +30,22 @@ export default function AutomationPage() {
             </motion.div>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-primary-600 via-emerald-600 to-primary-600 bg-clip-text text-transparent leading-tight px-4">
-              Automatisez 80%
-              <br />de vos tâches manuelles
+              Notion + N8n :
+              <br />L'automatisation sans limites
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 md:mb-8 leading-relaxed px-4">
-              Combinez Notion avec N8n pour créer un système qui
+              Connectez Notion à +400 applications et automatisez 80% de vos tâches
               <br className="hidden sm:block" />
-              <strong className="text-gray-900">travaille pour vous 24/7</strong>
+              <strong className="text-gray-900">Un système qui travaille pour vous 24/7</strong>
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-8 md:mb-12 px-4">
-              <Button href="#contact" variant="primary" className="text-base md:text-lg bg-gradient-to-r from-emerald-600 to-primary-600 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-8 md:mb-12 px-4">
+              <Button href="#contact" variant="primary" className="text-base md:text-lg bg-gradient-to-r from-emerald-600 to-primary-600 w-full sm:w-auto whitespace-nowrap">
                 Découvrir mon potentiel
                 <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
               </Button>
-              <Button href="#use-cases" variant="outline" className="text-base md:text-lg border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto">
+              <Button href="#use-cases" variant="outline" className="text-base md:text-lg border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto whitespace-nowrap">
                 Voir les cas d'usage
               </Button>
             </div>
@@ -198,7 +198,7 @@ export default function AutomationPage() {
           </motion.p>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-4 md:space-y-6">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
           {[
             {
               title: "🎯 Pipeline Commercial / CRM",
@@ -237,13 +237,13 @@ export default function AutomationPage() {
               ],
             },
           ].map((useCase, index) => (
-            <Card key={index} className="p-8 hover:shadow-2xl">
-              <h3 className="text-2xl font-bold mb-4 text-primary-700">{useCase.title}</h3>
+            <Card key={index} className="p-6 md:p-8 hover:shadow-2xl h-full">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 text-primary-700">{useCase.title}</h3>
               <ul className="space-y-3">
                 {useCase.items.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <ArrowRight className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{item}</span>
+                    <span className="text-gray-700 text-sm md:text-base">{item}</span>
                   </li>
                 ))}
               </ul>
