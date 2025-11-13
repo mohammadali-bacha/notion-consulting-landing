@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulting Notion - Optimisez votre productivité</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #111827;
+            --accent-color: #8B5CF6;
+            --accent-light: #A78BFA;
+            --text-gray: #6B7280;
+            --bg-light: #F9FAFB;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.7;
+            color: var(--primary-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            padding: 8rem 0 6rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+            animation: shimmer 15s linear infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .primary-btn {
+            background: white;
+            color: var(--accent-color);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .primary-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .primary-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            font-size: 1.25rem;
+            font-weight: 300;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .service-card {
+            padding: 3rem;
+            border-radius: 20px;
+            background: white;
+            border: 2px solid #f0f0f0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.05), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-light);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.4s ease;
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.2);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Trust Section */
+        .trust {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, var(--bg-light) 0%, white 100%);
+            position: relative;
+        }
+
+        .trust::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+        }
+
+        .trust-content {
+            text-align: center;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .trust-title {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .logos {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 180px));
+            gap: 3rem 3rem;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .logo-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.65;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 1rem;
+        }
+
+        .logo-item:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .logo-item img {
+            height: 50px;
+            width: auto;
+            display: block;
+            filter: grayscale(40%) brightness(1.1);
+            transition: all 0.4s ease;
+        }
+
+        .logo-item:hover img {
+            filter: grayscale(0%) brightness(1);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .logos {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem 3rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .logos {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .logo-item img {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Notion Consulting</div>
+            <div style="display: flex; gap: 2rem; align-items: center;">
+                <a href="notion-n8n-automation.html" style="text-decoration: none; color: var(--primary-color); font-weight: 500;">Notion + N8n</a>
+                <a href="#contact" class="cta-button">Commencer</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transformez le chaos en système qui génère des résultats</h1>
+                <p>Vous perdez des heures dans des outils dispersés ? Vos équipes cherchent l'information au lieu de créer de la valeur ? <strong>Notion peut devenir votre avantage compétitif.</strong></p>
+                <div class="hero-cta">
+                    <a href="#contact" class="primary-btn">Audit gratuit de 30 min</a>
+                </div>
+                <p style="font-size: 0.95rem; margin-top: 1.5rem; opacity: 0.9;">✓ Sans engagement  ✓ Diagnostic personnalisé  ✓ ROI garanti</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="services" style="padding: 6rem 0; background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" style="color: #dc2626;">Vous reconnaissez-vous ?</h2>
+                <p class="section-subtitle">Les problèmes que rencontrent 90% des entreprises</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card" style="border-color: #fecaca;">
+                    <div class="service-icon" style="background: linear-gradient(135deg, #dc2626, #ef4444);">❌</div>
+                    <h3>Information dispersée</h3>
+                    <p>Vos données sont éparpillées dans 10 outils différents. Chaque recherche devient une enquête policière.</p>
+                </div>
+                
+                <div class="service-card" style="border-color: #fecaca;">
+                    <div class="service-icon" style="background: linear-gradient(135deg, #dc2626, #ef4444);">⏱️</div>
+                    <h3>Temps perdu</h3>
+                    <p>Vos équipes passent 40% de leur temps à chercher l'information au lieu de produire de la valeur.</p>
+                </div>
+                
+                <div class="service-card" style="border-color: #fecaca;">
+                    <div class="service-icon" style="background: linear-gradient(135deg, #dc2626, #ef4444);">🔄</div>
+                    <h3>Process inefficaces</h3>
+                    <p>Chacun travaille à sa façon. Impossible de scaler ou d'onboarder rapidement de nouveaux membres.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">La solution : un système Notion qui travaille pour vous</h2>
+                <p class="section-subtitle">3 piliers pour transformer votre organisation</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Architecture & Setup</h3>
+                    <p><strong>Gagnez 15h/semaine par équipe.</strong> Je construis votre source de vérité unique : bases de données liées, workflows automatisés, et une structure qui évolue avec vous.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>Formation & Adoption</h3>
+                    <p><strong>100% de vos équipes autonomes en 2 semaines.</strong> Formation interactive, documentation vivante et support continu pour garantir l'adoption.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Automatisation & Scale</h3>
+                    <p><strong>Réduisez les tâches manuelles de 70%.</strong> Templates intelligents, intégrations avec vos outils existants (Slack, Google, CRM) et automatisations N8n.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust">
+        <div class="container">
+            <div class="trust-content">
+                <h3 class="trust-title">Ils me font confiance</h3>
+                <div class="logos">
+                    <!-- Ligne 1 : 4 logos -->
+                    <a href="https://joinformal.com" target="_blank" class="logo-item">
+                        <img src="Group 32 (2).png" alt="Joinformal">
+                    </a>
+                    <a href="https://naali.fr/" target="_blank" class="logo-item">
+                        <img src="Sans_titre_2_svg_6c08ca81-193f-4186-8808-9e5abad40358.avif" alt="Naali">
+                    </a>
+                    <a href="https://www.sweal.fr/" target="_blank" class="logo-item">
+                        <img src="654b6d1148049e2a9407700d_logo-sweal.png" alt="Sweal">
+                    </a>
+                    <a href="https://idariliving.com/" target="_blank" class="logo-item">
+                        <img src="logo_iDARi_noir_transparent.png" alt="iDari">
+                    </a>
+                    
+                    <!-- Ligne 2 : 4 logos -->
+                    <a href="https://www.smart-impulsion.com/" target="_blank" class="logo-item">
+                        <img src="Screenshot 2025-11-09 at 14.12.51.png" alt="Smart Impulsion">
+                    </a>
+                    <a href="https://entrepreneursdanslaville.com" target="_blank" class="logo-item">
+                        <img src="logoedlv2023-3.png.webp" alt="Entrepreneurs dans la ville">
+                    </a>
+                    <a href="https://em-lyon.com/fr" target="_blank" class="logo-item">
+                        <img src="emlyon-logo-seul-rvb-1.png" alt="emlyon business school">
+                    </a>
+                    <a href="https://leadpanda.fr" target="_blank" class="logo-item">
+                        <img src="www.leadpanda.fr_.png" alt="LeadPanda">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="services" style="padding: 6rem 0; background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Ils ont transformé leur organisation</h2>
+                <p class="section-subtitle">Résultats concrets en quelques semaines</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <p style="font-style: italic; margin-bottom: 1.5rem; color: var(--text-gray);">"Avant Notion, on perdait 2h par jour à chercher l'information. Maintenant, tout est centralisé et accessible en 2 clics. Le ROI a été immédiat."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">MC</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Marie Chen</h4>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">CEO, Scale-up 50 personnes</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <p style="font-style: italic; margin-bottom: 1.5rem; color: var(--text-gray);">"L'onboarding de nos nouveaux dev est passé de 3 semaines à 5 jours. Toute notre documentation technique est vivante et à jour."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">PL</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Pierre Laurent</h4>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">CTO, SaaS B2B</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <p style="font-style: italic; margin-bottom: 1.5rem; color: var(--text-gray);">"Nous avons fermé 6 outils payants. Notion + les automatisations N8n nous font économiser 800€/mois et des heures de synchro manuelle."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">SB</div>
+                        <div>
+                            <h4 style="margin-bottom: 0.25rem;">Sophie Bernard</h4>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">Ops Manager, Agence</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="services" style="padding: 6rem 0; background: var(--bg-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Questions fréquentes</h2>
+                <p class="section-subtitle">Tout ce que vous devez savoir</p>
+            </div>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="service-card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem;">💰 Quel est le ROI d'un projet Notion ?</h3>
+                    <p>Mes clients récupèrent en moyenne <strong>15h/semaine par équipe</strong> et réduisent leurs coûts d'outils de 30-50%. Le ROI est généralement atteint en moins de 2 mois.</p>
+                </div>
+
+                <div class="service-card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem;">⏱️ Combien de temps dure un accompagnement ?</h3>
+                    <p>Selon la complexité : <strong>2-4 semaines pour le setup initial</strong>, puis 2 semaines de formation. Je reste disponible 3 mois pour les ajustements et questions.</p>
+                </div>
+
+                <div class="service-card" style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem;">🔧 Puis-je intégrer Notion avec mes outils actuels ?</h3>
+                    <p>Absolument. J'intègre Notion avec <strong>Slack, Google Workspace, votre CRM, Zapier/N8n</strong> et tout outil disposant d'une API. Vos équipes n'ont pas à changer leurs habitudes.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem;">👥 Et si mes équipes résistent au changement ?</h3>
+                    <p>C'est ma spécialité. Je conçois des systèmes <strong>intuitifs dès le jour 1</strong>, et j'accompagne personnellement vos équipes. Taux d'adoption moyen : 95% en 2 semaines.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Prêt à reprendre le contrôle ?</h2>
+                <p><strong>Audit gratuit de 30 minutes</strong> : j'analyse votre situation actuelle et vous montre exactement comment Notion peut transformer votre organisation.</p>
+                <a href="mailto:contact@notion-consulting.com" class="primary-btn">Réserver mon audit gratuit</a>
+                <p style="font-size: 0.95rem; margin-top: 1.5rem; opacity: 0.9;">Disponibilités limitées • Réponse sous 24h • Sans engagement</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="mailto:contact@notion-consulting.com" class="footer-link">contact@notion-consulting.com</a>
+                <a href="#services" class="footer-link">Services</a>
+                <a href="https://linkedin.com" target="_blank" class="footer-link">LinkedIn</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Notion Consulting. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

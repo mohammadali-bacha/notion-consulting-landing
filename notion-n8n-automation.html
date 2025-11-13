@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion + N8n : Automatisez votre workflow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #111827;
+            --accent-color: #8B5CF6;
+            --accent-light: #A78BFA;
+            --accent-green: #10b981;
+            --text-gray: #6B7280;
+            --bg-light: #F9FAFB;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.7;
+            color: var(--primary-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-green));
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #10b981 100%);
+            position: relative;
+            padding: 8rem 0 6rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .primary-btn {
+            background: white;
+            color: var(--accent-color);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            font-size: 1.25rem;
+            font-weight: 300;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .card {
+            padding: 2.5rem;
+            border-radius: 20px;
+            background: white;
+            border: 2px solid #f0f0f0;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-light);
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-green));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        /* Use Cases */
+        .use-case {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .use-case h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .use-case ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .use-case li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .use-case li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #10b981 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Notion × N8n</div>
+            <div class="nav-links">
+                <a href="notion-consulting-landing.html">Notion Simple</a>
+                <a href="#automation">Automatisations</a>
+                <a href="#contact" class="cta-button">Démarrer</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Notion × N8n = Superpouvoir</h1>
+                <p>Combinez la puissance de Notion avec l'automatisation N8n pour <strong>éliminer 80% des tâches manuelles</strong> et créer un système qui travaille pour vous 24/7.</p>
+                <a href="#contact" class="primary-btn">Découvrir mon potentiel</a>
+                <p style="font-size: 0.95rem; margin-top: 1.5rem; opacity: 0.9;">✓ Automatisation personnalisée  ✓ Sans code  ✓ ROI immédiat</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" style="color: #dc2626;">Le problème avec Notion seul</h2>
+                <p class="section-subtitle">Notion est puissant, mais limité sans automatisation</p>
+            </div>
+            
+            <div class="grid-3">
+                <div class="card" style="border-color: #fecaca;">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #dc2626, #ef4444);">📋</div>
+                    <h3>Saisie manuelle répétitive</h3>
+                    <p>Copier-coller des données entre Notion et vos autres outils. Mise à jour manuelle des statuts et informations.</p>
+                </div>
+                
+                <div class="card" style="border-color: #fecaca;">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #dc2626, #ef4444);">🔗</div>
+                    <h3>Outils isolés</h3>
+                    <p>Notion ne communique pas avec Gmail, Slack, votre CRM... Pas de synchronisation automatique.</p>
+                </div>
+                
+                <div class="card" style="border-color: #fecaca;">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #dc2626, #ef4444);">⏰</div>
+                    <h3>Temps perdu</h3>
+                    <p>Vos équipes passent des heures sur des tâches administratives qui pourraient être automatisées.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="automation" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">La solution : Notion + N8n</h2>
+                <p class="section-subtitle">Transformez Notion en machine automatisée</p>
+            </div>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">🤖</div>
+                    <h3>Automatisations intelligentes</h3>
+                    <p><strong>Zéro code requis.</strong> Je crée des workflows N8n qui connectent Notion à tous vos outils et automatisent vos processus récurrents.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3>Synchronisation en temps réel</h3>
+                    <p><strong>Données toujours à jour.</strong> Les modifications dans un outil se répercutent automatiquement dans Notion et vice-versa.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Workflows sur-mesure</h3>
+                    <p><strong>Adapté à votre business.</strong> De la gestion de leads à la facturation, j'automatise ce qui vous fait perdre du temps.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Ce que je peux automatiser pour vous</h2>
+                <p class="section-subtitle">Exemples concrets d'automatisations Notion × N8n</p>
+            </div>
+            
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="use-case">
+                    <h3>🎯 Pipeline Commercial / CRM</h3>
+                    <ul>
+                        <li>Nouveau lead sur votre site → Création automatique dans Notion</li>
+                        <li>Email reçu → Extraction des infos et ajout au CRM Notion</li>
+                        <li>Deal gagné → Création automatique du projet + notification Slack</li>
+                        <li>Relance automatique des prospects après X jours d'inactivité</li>
+                    </ul>
+                </div>
+
+                <div class="use-case">
+                    <h3>📧 Gestion Email & Communication</h3>
+                    <ul>
+                        <li>Email important → Sauvegarde automatique dans Notion avec contexte</li>
+                        <li>Nouvelle tâche dans Notion → Email de notification personnalisé</li>
+                        <li>Statut changé dans Notion → Message Slack automatique</li>
+                        <li>Synthèse quotidienne/hebdomadaire envoyée par email</li>
+                    </ul>
+                </div>
+
+                <div class="use-case">
+                    <h3>💼 Gestion de Projets</h3>
+                    <ul>
+                        <li>Nouveau client → Génération automatique du workspace projet dans Notion</li>
+                        <li>Tâche terminée → Mise à jour automatique du statut + notification équipe</li>
+                        <li>Deadline approche → Rappels automatiques par email/Slack</li>
+                        <li>Projet terminé → Génération automatique du rapport + archivage</li>
+                    </ul>
+                </div>
+
+                <div class="use-case">
+                    <h3>📊 Reporting & Analytics</h3>
+                    <ul>
+                        <li>Données Google Analytics → Dashboard automatique dans Notion</li>
+                        <li>Ventes du mois → Rapport automatique avec graphiques</li>
+                        <li>Données CRM → Mise à jour automatique des KPIs Notion</li>
+                        <li>Export automatique de rapports en PDF/Excel</li>
+                    </ul>
+                </div>
+
+                <div class="use-case">
+                    <h3>🎓 Onboarding & RH</h3>
+                    <ul>
+                        <li>Nouveau collaborateur → Création automatique de son profil + checklist</li>
+                        <li>Demande de congé → Workflow de validation automatique</li>
+                        <li>Formation terminée → Mise à jour automatique du profil employé</li>
+                        <li>Rappels automatiques pour entretiens annuels</li>
+                    </ul>
+                </div>
+
+                <div class="use-case">
+                    <h3>💰 Finance & Facturation</h3>
+                    <ul>
+                        <li>Facture payée (Stripe/PayPal) → Mise à jour automatique dans Notion</li>
+                        <li>Nouveau projet → Génération automatique du devis</li>
+                        <li>Fin du mois → Calcul automatique du chiffre d'affaires</li>
+                        <li>Budget dépassé → Alerte automatique</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Les résultats concrets</h2>
+                <p class="section-subtitle">Ce que l'automatisation vous apporte</p>
+            </div>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <h3 style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 0.5rem;">80%</h3>
+                    <h4 style="margin-bottom: 0.5rem;">Tâches manuelles éliminées</h4>
+                    <p>Vos équipes se concentrent sur ce qui compte vraiment</p>
+                </div>
+                
+                <div class="card">
+                    <h3 style="font-size: 2.5rem; color: var(--accent-green); margin-bottom: 0.5rem;">24/7</h3>
+                    <h4 style="margin-bottom: 0.5rem;">Système qui tourne</h4>
+                    <p>Les automatisations travaillent pour vous, même la nuit</p>
+                </div>
+                
+                <div class="card">
+                    <h3 style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 0.5rem;">0</h3>
+                    <h4 style="margin-bottom: 0.5rem;">Erreur humaine</h4>
+                    <p>Données synchronisées et cohérentes partout</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Comment ça marche ?</h2>
+                <p class="section-subtitle">4 étapes pour automatiser votre workflow</p>
+            </div>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">🔍</div>
+                    <h3>1. Audit</h3>
+                    <p>J'analyse vos processus actuels et identifie les opportunités d'automatisation à fort impact.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🎨</div>
+                    <h3>2. Design</h3>
+                    <p>Je conçois l'architecture Notion optimale et les workflows N8n adaptés à vos besoins.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>3. Build</h3>
+                    <p>Je configure Notion, créé les automatisations N8n et intègre tous vos outils.</p>
+                </div>
+            </div>
+
+            <div style="max-width: 400px; margin: 3rem auto 0;">
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3>4. Launch & Support</h3>
+                    <p>Formation de vos équipes + 3 mois de support pour ajustements et optimisations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Investissement & ROI</h2>
+                <p class="section-subtitle">Un projet qui se rentabilise rapidement</p>
+            </div>
+            
+            <div style="max-width: 700px; margin: 0 auto;">
+                <div class="card" style="padding: 3rem;">
+                    <h3 style="text-align: center; font-size: 1.8rem; margin-bottom: 2rem;">Formule Tout-en-un</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 1rem 0; border-bottom: 1px solid #f0f0f0;">✓ Architecture Notion complète</li>
+                        <li style="padding: 1rem 0; border-bottom: 1px solid #f0f0f0;">✓ 5-10 automatisations N8n sur-mesure</li>
+                        <li style="padding: 1rem 0; border-bottom: 1px solid #f0f0f0;">✓ Intégrations avec vos outils existants</li>
+                        <li style="padding: 1rem 0; border-bottom: 1px solid #f0f0f0;">✓ Formation complète de vos équipes</li>
+                        <li style="padding: 1rem 0; border-bottom: 1px solid #f0f0f0;">✓ 3 mois de support & optimisations</li>
+                        <li style="padding: 1rem 0;">✓ Documentation détaillée</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <p style="color: var(--text-gray); margin-bottom: 0.5rem;">À partir de</p>
+                        <p style="font-size: 2.5rem; font-weight: 800; color: var(--accent-color); margin-bottom: 1rem;">Sur devis</p>
+                        <p style="color: var(--text-gray); font-size: 0.95rem;">ROI moyen : 2-3 mois • Économies : 15-25h/semaine</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Prêt à automatiser votre workflow ?</h2>
+                <p><strong>Audit gratuit de 30 minutes</strong> : je vous montre exactement quelles automatisations peuvent transformer votre business.</p>
+                <a href="mailto:contact@notion-consulting.com" class="primary-btn">Réserver mon audit gratuit</a>
+                <p style="font-size: 0.95rem; margin-top: 1.5rem; opacity: 0.9;">Sans engagement • Réponse sous 24h • Devis personnalisé</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="mailto:contact@notion-consulting.com" class="footer-link">contact@notion-consulting.com</a>
+                <a href="notion-consulting-landing.html" class="footer-link">Notion Simple</a>
+                <a href="#automation" class="footer-link">Automatisations</a>
+            </div>
+            
+            <div style="padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.5); font-size: 0.9rem;">
+                <p>&copy; 2025 Notion Consulting. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
