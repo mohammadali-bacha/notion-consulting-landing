@@ -143,14 +143,11 @@ export default function Home() {
             <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
               {/* Badge */}
               <div className="flex-shrink-0">
-                <div className="relative w-32 h-40 md:w-40 md:h-48">
-                  <Image
-                    src="/notion-academy-badge.png"
-                    alt="Notion Academy Essentials - Certification officielle"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+                <img
+                  src="/notion-academy-badge.png"
+                  alt="Notion Academy Essentials - Certification officielle"
+                  className="w-32 h-40 md:w-40 md:h-48 object-contain"
+                />
               </div>
               
               {/* Content */}
