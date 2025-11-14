@@ -142,17 +142,12 @@ export default function Home() {
           <div className="bg-white rounded-2xl shadow-lg border border-primary-100 p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
               {/* Badge */}
-              <div className="flex-shrink-0 bg-gradient-to-br from-orange-400 to-orange-500 rounded-3xl p-6 shadow-lg">
-                <div className="bg-white rounded-2xl p-4 mb-3">
-                  <div className="text-center">
-                    <div className="text-xs font-bold text-gray-900 leading-tight">Notion<br/>Academy<br/>Essentials</div>
-                  </div>
-                </div>
-                <div className="flex justify-center">
-                  <svg className="w-16 h-16 text-white" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M50 10 C30 10 15 25 15 45 C15 50 16 55 18 59 L25 55 C23 52 22 48 22 45 C22 29 35 17 50 17 C65 17 78 29 78 45 C78 48 77 52 75 55 L82 59 C84 55 85 50 85 45 C85 25 70 10 50 10 Z M50 25 C37 25 27 35 27 47 C27 50 28 53 29 56 L50 70 L71 56 C72 53 73 50 73 47 C73 35 63 25 50 25 Z M50 35 C45 35 40 39 40 44 L40 55 C40 60 45 65 50 65 C55 65 60 60 60 55 L60 44 C60 39 55 35 50 35 Z M42 80 L50 85 L58 80 L50 75 Z" />
-                  </svg>
-                </div>
+              <div className="flex-shrink-0">
+                <img
+                  src="/notion-academy-badge.png"
+                  alt="Notion Academy Essentials - Certification officielle"
+                  className="w-32 md:w-40 h-auto object-contain"
+                />
               </div>
               
               {/* Content */}
