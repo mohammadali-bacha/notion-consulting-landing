@@ -139,52 +139,90 @@ export default function Home() {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <div className="bg-white rounded-2xl shadow-lg border border-primary-100 p-8 md:p-12">
-            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-              {/* Badge */}
-              <div className="flex-shrink-0">
-                <img
-                  src="/notion-academy-badge.png"
-                  alt="Notion Academy Essentials - Certification officielle"
-                  className="w-32 md:w-40 h-auto object-contain"
-                />
-              </div>
-              
-              {/* Content */}
-              <div className="flex-1 text-center md:text-left">
-                <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-primary-50 rounded-full">
-                  <span className="text-2xl">✓</span>
-                  <span className="text-sm font-semibold text-primary-700">Certification Officielle</span>
+          <div className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Certifications Notion
+            </h3>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Expertise certifiée officiellement par Notion
+            </p>
+          </div>
+
+          {/* Badges Grid */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Badge 1: Academy Essentials */}
+            <div className="bg-white rounded-2xl shadow-lg border border-primary-100 p-8 hover:shadow-xl transition-shadow">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-6">
+                  <img
+                    src="/notion-academy-badge.png"
+                    alt="Notion Academy Essentials"
+                    className="w-32 md:w-40 h-auto object-contain"
+                  />
                 </div>
                 
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-                  Notion Academy Essentials
-                </h3>
+                <div className="inline-flex items-center gap-2 mb-3 px-3 py-1.5 bg-primary-50 rounded-full">
+                  <span className="text-xl">✓</span>
+                  <span className="text-xs font-semibold text-primary-700">Certifié</span>
+                </div>
                 
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  Certifié officiellement par <strong>Notion</strong> · Formation complète et validation des compétences essentielles sur Notion
+                <h4 className="text-xl font-bold text-gray-900 mb-2">
+                  Academy Essentials
+                </h4>
+                
+                <p className="text-sm text-gray-600 mb-4">
+                  Maîtrise des fondamentaux Notion
                 </p>
                 
-                <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-                  <a
-                    href="https://verify.skilljar.com/c/isxjdrsku599"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-full hover:bg-primary-700 transition-colors font-semibold text-sm"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Vérifier le certificat
-                  </a>
-                  
-                  <div className="text-sm text-gray-500 flex items-center justify-center md:justify-start gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    Obtenu le 14 Nov. 2024
-                  </div>
+                <a
+                  href="https://verify.skilljar.com/c/isxjdrsku599"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-full hover:bg-primary-700 transition-colors font-semibold text-sm"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Vérifier
+                </a>
+              </div>
+            </div>
+
+            {/* Badge 2: Workflows */}
+            <div className="bg-white rounded-2xl shadow-lg border border-primary-100 p-8 hover:shadow-xl transition-shadow">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-6">
+                  <img
+                    src="/badge-notion-workflows.png"
+                    alt="Notion Workflows"
+                    className="w-32 md:w-40 h-auto object-contain"
+                  />
                 </div>
+                
+                <div className="inline-flex items-center gap-2 mb-3 px-3 py-1.5 bg-primary-50 rounded-full">
+                  <span className="text-xl">✓</span>
+                  <span className="text-xs font-semibold text-primary-700">Certifié</span>
+                </div>
+                
+                <h4 className="text-xl font-bold text-gray-900 mb-2">
+                  Notion Workflows
+                </h4>
+                
+                <p className="text-sm text-gray-600 mb-4">
+                  Expert en automatisations Notion
+                </p>
+                
+                <a
+                  href="https://verify.skilljar.com/c/vu8xpf3m6qbb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-full hover:bg-primary-700 transition-colors font-semibold text-sm"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Vérifier
+                </a>
               </div>
             </div>
           </div>
