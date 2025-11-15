@@ -155,9 +155,9 @@ export default function Home() {
               <div className="flex flex-col items-center text-center">
                 <div className="mb-6">
                   <img
-                    src="/notion-academy-badge.png"
+                    src="/badge-notion-essentials.png"
                     alt="Notion Academy Essentials"
-                    className="w-32 md:w-40 h-auto object-contain"
+                    className="w-24 md:w-32 h-auto object-contain"
                   />
                 </div>
                 
@@ -195,7 +195,7 @@ export default function Home() {
                   <img
                     src="/badge-notion-workflows.png"
                     alt="Notion Workflows"
-                    className="w-32 md:w-40 h-auto object-contain"
+                    className="w-24 md:w-32 h-auto object-contain"
                   />
                 </div>
                 
